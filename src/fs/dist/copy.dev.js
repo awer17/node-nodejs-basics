@@ -7,18 +7,18 @@ var _path = _interopRequireDefault(require("path"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var copy = function copy() {
-  var sourcePath, destinationPath, files, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, file, sourceFilePath, destinationFilePath;
+  var folderFiles, folderFilesCopy, files, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, file, sourceFilePath, destinationFilePath;
 
   return regeneratorRuntime.async(function copy$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          sourcePath = 'files';
-          destinationPath = 'files_copy'; //проверка коталогов
+          folderFiles = 'files';
+          folderFilesCopy = 'files_copy'; //проверка коталогов
 
           _context.prev = 2;
           _context.next = 5;
-          return regeneratorRuntime.awrap(_promises["default"].stat(sourcePath));
+          return regeneratorRuntime.awrap(_promises["default"].stat(folderFiles));
 
         case 5:
           _context.next = 11;
@@ -33,7 +33,7 @@ var copy = function copy() {
         case 11:
           _context.prev = 11;
           _context.next = 14;
-          return regeneratorRuntime.awrap(_promises["default"].stat(destinationPath));
+          return regeneratorRuntime.awrap(_promises["default"].stat(folderFilesCopy));
 
         case 14:
           throw new Error('FS operation failed: Destination directory already exists');
@@ -52,11 +52,11 @@ var copy = function copy() {
         case 21:
           _context.prev = 21;
           _context.next = 24;
-          return regeneratorRuntime.awrap(_promises["default"].mkdir(destinationPath));
+          return regeneratorRuntime.awrap(_promises["default"].mkdir(folderFilesCopy));
 
         case 24:
           _context.next = 26;
-          return regeneratorRuntime.awrap(_promises["default"].readdir(sourcePath));
+          return regeneratorRuntime.awrap(_promises["default"].readdir(folderFiles));
 
         case 26:
           files = _context.sent;
@@ -74,8 +74,8 @@ var copy = function copy() {
           }
 
           file = _step.value;
-          sourceFilePath = _path["default"].join(sourcePath, file);
-          destinationFilePath = _path["default"].join(destinationPath, file);
+          sourceFilePath = _path["default"].join(folderFiles, file);
+          destinationFilePath = _path["default"].join(folderFilesCopy, file);
           _context.next = 38;
           return regeneratorRuntime.awrap(_promises["default"].copyFile(sourceFilePath, destinationFilePath));
 
